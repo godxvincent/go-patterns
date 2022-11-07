@@ -1,0 +1,40 @@
+version: '3'
+
+# Variables globals
+vars:
+  GREETING: Hello from Task file!
+
+tasks:
+  clean:
+    cmds:
+      - rm -rf dist \
+           ./lambdas \
+           ./releases
+      - rm -vf \
+          ./coverage.* \
+            ./cpd.*
+  dep:
+    cmds:
+      - go mod download
+  tidy:
+    cmds:
+      - go mod tidy
+  test:
+      cmds:
+        # - go test ./... -cover -count=1
+        - rm -rf coverage
+        - mkdir -p coverage
+        - go test ./... -count=1 -tags test -coverprofile=coverage.out 
+        - go tool cover -html=coverage.out -o=coverage.html
+        - mv coverage.out coverage/
+        - mv coverage.html coverage/
+      # silent: true
+  fmt:
+    - go fmt ./...
+  build:
+    deps:
+      [fmt, test]
+    cmds:
+      - mkdir -p dist
+      - go build -v -o ./dist/patterns.exe  ./spkg-patterns 
+  
