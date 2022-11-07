@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 # Variables globals
 vars:
@@ -8,11 +8,11 @@ tasks:
   clean:
     cmds:
       - rm -rf dist \
-           ./lambdas \
-           ./releases
+        ./lambdas \
+        ./releases
       - rm -vf \
-          ./coverage.* \
-            ./cpd.*
+        ./coverage.* \
+        ./cpd.*
   dep:
     cmds:
       - go mod download
@@ -20,21 +20,19 @@ tasks:
     cmds:
       - go mod tidy
   test:
-      cmds:
-        # - go test ./... -cover -count=1
-        - rm -rf coverage
-        - mkdir -p coverage
-        - go test ./... -count=1 -tags test -coverprofile=coverage.out 
-        - go tool cover -html=coverage.out -o=coverage.html
-        - mv coverage.out coverage/
-        - mv coverage.html coverage/
-      # silent: true
+    cmds:
+      # - go test ./... -cover -count=1
+      - rm -rf coverage
+      - mkdir -p coverage
+      - go test ./... -count=1 -tags test -coverprofile=coverage.out
+      - go tool cover -html=coverage.out -o=coverage.html
+      - mv coverage.out coverage/
+      - mv coverage.html coverage/
+    # silent: true
   fmt:
     - go fmt ./...
   build:
-    deps:
-      [fmt, test]
+    deps: [fmt, test]
     cmds:
       - mkdir -p dist
-      - go build -v -o ./dist/patterns.exe  ./spkg-patterns 
-  
+      - go build -v -o ./dist/patterns.exe  ./patterns/cmd

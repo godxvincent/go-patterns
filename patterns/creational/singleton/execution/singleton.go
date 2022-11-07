@@ -3,7 +3,7 @@ package execution
 import (
 	"log"
 
-	"godxvincent.com/go-patterns/spkg-patterns/singleton/model"
+	"godxvincent.com/go-patterns/patterns/creational/singleton/model"
 )
 
 func Execute() {

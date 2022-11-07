@@ -1,4 +1,5 @@
-//+build !test
+//go:build !test
+// +build !test
 
 package main
 
@@ -8,8 +9,8 @@ import (
 	"log"
 	"os"
 
-	builder "godxvincent.com/go-patterns/spkg-patterns/builder/execution"
-	singleton "godxvincent.com/go-patterns/spkg-patterns/singleton/execution"
+	builder "godxvincent.com/go-patterns/patterns/creational/builder/execution"
+	singleton "godxvincent.com/go-patterns/patterns/creational/singleton/execution"
 )
 
 type CallingPatterns map[string]func()
