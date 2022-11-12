@@ -1,11 +1,11 @@
 # Software Design Patterns implemented using golang
 
-Este repositorio contiene ejemplos escritos en golang de los diferentes patrones de construcción de software.
-La página de referencia del listado es de wikipedia, ciertamente no es la mejor fuente pero sirve de punto de inicio.
+This repository has examples of software patterns that were written using golang.
+Wikipedia was used as a reference of the list of more common sofrware patterns, Disclaimer (I use wikipedia as a starter point but in the future the big goal is to add more and better sources of information)
 
-## Listado de patrones
+## List of patterns
 
-### Creacionales
+### Creational Patterns
 
 - [Abstract factory](https://en.wikipedia.org/wiki/Abstract_factory_pattern)
 - [Builder](https://en.wikipedia.org/wiki/Builder_pattern)
@@ -18,7 +18,7 @@ La página de referencia del listado es de wikipedia, ciertamente no es la mejor
 - [RAII (Resource Acquisition is Initialization)](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)
 - [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern)
 
-### Estructurales
+### Structural Patterns
 
 - [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern)
 - [Bridge](https://en.wikipedia.org/wiki/Bridge_pattern)
@@ -33,7 +33,7 @@ La página de referencia del listado es de wikipedia, ciertamente no es la mejor
 - [Proxy](https://en.wikipedia.org/wiki/Proxy_pattern)
 - [Twin](https://en.wikipedia.org/wiki/Twin_pattern)
 
-### Comportamentales
+### Behavioral Patterns
 
 - [Blackboard](<https://en.wikipedia.org/wiki/Blackboard_(design_pattern)>)
 - [Chaing of responsability](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern)
@@ -51,7 +51,7 @@ La página de referencia del listado es de wikipedia, ciertamente no es la mejor
 - [Template method](https://en.wikipedia.org/wiki/Template_method_pattern)
 - [Visitor](https://en.wikipedia.org/wiki/Visitor_pattern)
 
-### Concurrencia
+### Concurrency Patterns
 
 - [Active Object](https://en.wikipedia.org/wiki/Active_object)
 - [Balking](https://en.wikipedia.org/wiki/Balking_pattern)
@@ -72,30 +72,34 @@ La página de referencia del listado es de wikipedia, ciertamente no es la mejor
 - Safe Concurrency with Exclusive Ownership
 - CPU atomic operation
 
-## Consideraciones para ejecutar el proyecto
+## How to execute this project
 
-## Comandos adicionales
+Whoever is interested in this project just need to execute on the root of the project this command
+`go run patterns/cmd/main.go -pattern <patternname>`
 
-- Links de referencia https://golangdocs.com/code-coverage-in-golang
-- Para poder saber la conbertura de las pruebas unitarias `go test -cover` para generar el reporte de las pruebas unitarias
-- Para establecer el archivo de salida se usa el siguiente comando `go test -coverprofile=coverage.out`
-- Para generar un archvio sobre el reporte generado se usa el siguiente comando `go tool cover -html=coverage.out`
-- Para correr los test en el package principal y en los subfolders usar este comando `go test ./...`
+e.g
+
+`go run patterns/cmd/main.go -pattern builder`
+
+In case, -pattern parameter is not passed the default pattern is singleton.
+
+## Some extra commands
+
+- Execute unit test with coverage report `go test -cover`
+- Execute unit test with coverage report as an output file `go test -coverprofile=coverage.out`
+- Generate html report from previous output `go tool cover -html=coverage.out`
+- Execute unit test recursively `go test ./...`
 
 ## Building project
 
 - build go projects with [task](https://taskfile.dev/#/)
-- Instalación si ya tienes instalado go correctamente solo es necesario instalarlo así `go install github.com/go-task/task/v3/cmd/task@latest`
-- Para este proyecto he decido hacer uso de `go-task/task` una herramienta hecha en go multiplataforma para facilitar la ejecución de comandos de building.
-- El archivo `Taskfile.yml` contiene los tasks disponibles.
-- Taggear los archivos de go con `//+build !test` antes del package y dejando una linea intermedia y ajustando el comando de test y building podemos excluir o indicar que paquetes hacen parte del paquete. Aqui link de referencia https://pkg.go.dev/cmd/go#hdr-Build_constraints
-
-## Go mock
-
-https://github.com/golang/mock
-Mock generado para la interfase del S3 Client
-mockgen -destination=spkg-parquet-s3/services/mocks/mocks3.go -package=mocks github.com/aws/aws-sdk-go/service/s3/s3iface S3API
+- Install task command (go itself is a pre-requisit) `go install github.com/go-task/task/v3/cmd/task@latest`
+- The decision of using `go-task/task` as a tool for handling local building is because task is a solution multiplatform based on golang.
+- File `Taskfile.yml` has all the available tasks.
+- In case of skip a file of unit test mark the files with this sentnces `//+build !test` before package name and adding an empty line and passing the name of the components to be considerd. More info [here](https://pkg.go.dev/cmd/go#hdr-Build_constraints)
 
 # Useful links
 
-[golang struct validator](github.com/go-playground/validator/v10)
+- [golang struct validator](github.com/go-playground/validator/v10)
+- [Code coverage](https://golangdocs.com/code-coverage-in-golang)
+- [Go Mock](https://github.com/golang/mock)

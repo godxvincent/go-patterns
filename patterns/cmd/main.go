@@ -5,9 +5,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
-	"os"
 
 	builder "godxvincent.com/go-patterns/patterns/creational/builder/execution"
 	singleton "godxvincent.com/go-patterns/patterns/creational/singleton/execution"
@@ -19,11 +17,10 @@ var patterns CallingPatterns
 
 func main() {
 
-	fmt.Println(os.Args)
 	// variables declaration
 	var patternSelected string
 
-	initLoadFunctions()
+	// initLoadFunctions()
 	// flags declaration using flag package
 	flag.StringVar(&patternSelected, "pattern", "singleton", "Please set up the patter required. Default is singleton")
 
@@ -32,14 +29,16 @@ func main() {
 
 	// check if cli params match
 	if patternSelected != "" {
+		log.Println("*************************************Starting Demo Pattern*************************************")
 		log.Println("This is the pattern selected by the user =>", patternSelected)
 		functionSelected := patterns[patternSelected]
 		functionSelected()
+		log.Println("*************************************Ending Demo Pattern*************************************")
 	}
 
 }
 
-func initLoadFunctions() {
+func init() {
 	patterns = make(map[string]func())
 	patterns["singleton"] = singleton.Execute
 	patterns["builder"] = builder.Execute
